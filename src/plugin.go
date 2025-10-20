@@ -241,6 +241,10 @@ func (p *swarmPlugin) discoverServices(_ context.Context, params []string) (any,
 			}
 		}
 
+		if s.Spec.Labels["zabbix.ignore.health"] == "true" {
+			continue
+		}
+
 		// Create stable service key: stackname_servicename or just servicename for standalone
 		serviceKey := s.Spec.Name
 		if stackName != "standalone" {
